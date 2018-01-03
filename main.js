@@ -1,19 +1,83 @@
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 const url = require('url')
 
-// Keep a global reference of the window object, if you don't, the window will
+// Define assets directory
+const assetsDirectory = path.join(__dirname, 'img')
+
+// Keep a global reference of the window and tray object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let tray
+
+// Don't show the app in the doc
+app.dock.hide()
+
+
+const toggleWindow = () => {
+  if (mainWindow.isVisible()) {
+    mainWindow.hide()
+  } else {
+    showWindow()
+  }
+}
+
+const getWindowPosition = () => {
+  const windowBounds = mainWindow.getBounds()
+  const trayBounds = tray.getBounds()
+
+  // Center window horizontally below the tray icon
+  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
+
+  // Position window 4 pixels vertically below the tray icon
+  const y = Math.round(trayBounds.y + trayBounds.height + 3)
+
+  return {x: x, y: y}
+}
+
+
+const showWindow = () => {
+  const position = getWindowPosition()
+  mainWindow.setPosition(position.x, position.y, false)
+  mainWindow.show()
+  mainWindow.focus()
+}
+
+// Creates tray image & toggles window on click
+const createTray = () => {
+  tray = new electron.Tray(path.join(assetsDirectory, 'icon.png'))
+  tray.on('click', function (event) {
+    toggleWindow()
+  })
+}
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 800, 
+    height: 600, 
+    show: false, 
+    frame: false, 
+    fullscreenable: false, 
+    resizable: false, 
+    transparent: false,
+    webPreferences: {
+      // Prevents renderer process code from not running when window is
+      // hidden
+      backgroundThrottling: false
+    }})
+
+  // Hide the window when it loses focus
+  mainWindow.on('blur', () => {
+    if (!mainWindow.webContents.isDevToolsOpened()) {
+      mainWindow.hide()
+    }
+  })
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -37,7 +101,10 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', function() {
+  createTray()
+  createWindow()
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
