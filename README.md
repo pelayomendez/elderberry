@@ -1,45 +1,25 @@
-# electron-quick-start
+# Elderberry
 
-**Clone and run for a quick way to see Electron in action.**
+## Your homeopathic anti-virus solution.
 
-This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/tutorial/quick-start) within the Electron documentation.
+Visit our [official website](http://www.pelayomendez.com/elderberry) and download the specific version for your operating system.
 
-**Use this app along with the [Electron API Demos](http://electron.atom.io/#get-started) app for API code examples to help you get started.**
+**Maximum performance**
 
-A basic Electron application needs just these files:
+Our incredible technology consumes less resources than any other anti-virus. Our technology is fully based on a "not scan" philosophy so your system does not have to waste precious resources fighting against the virus.
 
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
+**100% Artificial Intelligence-Free**
 
-You can learn more about each of these components within the [Quick Start Guide](http://electron.atom.io/docs/tutorial/quick-start).
+No artificial intelligence is used. Elderberry is a full natural flavour solution totally free of science.
 
-## To Use
+**Vaccine-free nostalgia**
 
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+We respect your right to feel freer as humans and spread your virus around the world. Get back to experiencing those extinguised computer viruses from the 90's. Our "vaccine-free" system ensures not harming your system by using scienctific techniques.
 
-```bash
-# Clone this repository
-git clone https://github.com/electron/electron-quick-start
-# Go into the repository
-cd electron-quick-start
-# Install dependencies
-npm install
-# Run the app
-npm start
-```
+**Transparent as water**
 
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
-
-## Resources for Learning Electron
-
-- [electron.atom.io/docs](http://electron.atom.io/docs) - all of Electron's documentation
-- [electron.atom.io/community/#boilerplates](http://electron.atom.io/community/#boilerplates) - sample starter apps created by the community
-- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
-- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
-- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
-- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
+Elderberry is free, multi-platform and open source.
 
 ## License
 
-[CC0 1.0 (Public Domain)](LICENSE.md)
+[MIT Licence](LICENSE.md)

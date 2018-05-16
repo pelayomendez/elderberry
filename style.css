@@ -1,0 +1,47 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    color: #FFF;
+    background: #2e7789;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+	text-decoration: underline;
+    color: #FFF;
+    
+    cursor: pointer;
+    cursor: hand;
+}
+
+section#logo {
+
+	background: #2e7789;
+	color: #FFF;
+
+	width: 400px;
+	height: 400px;
+
+	background-image: url("img/elderberry_logo.png");
+    background-repeat: no-repeat, repeat;
+    background-size: 192px;
+    background-position: 50% 25%;
+
+   text-align:center;
+
+}
+
+section#logo h1 {
+
+    color: #FFF;
+    font-size: 14px;
+
+	margin:auto;
+    line-height:20px;
+    vertical-align:middle;
+
+    margin-top:280px;
+
+}

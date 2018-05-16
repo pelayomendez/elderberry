@@ -1,6 +1,7 @@
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
+const Menu = electron.Menu
 
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
@@ -16,9 +17,15 @@ const assetsDirectory = path.join(__dirname, 'img')
 let mainWindow
 let tray
 
-// Don't show the app in the doc
-app.dock.hide()
+var os = require('os');
+var isWin = os.platform() === "win32";
+var isMac = os.platform() === "darwin";
+var isLinux = os.platform() === "linux";
 
+// Don't show the app in the doc
+if(isMac) {
+  app.dock.hide()
+}
 
 const toggleWindow = () => {
   if (mainWindow.isVisible()) {
@@ -28,39 +35,40 @@ const toggleWindow = () => {
   }
 }
 
-const getWindowPosition = () => {
-  const windowBounds = mainWindow.getBounds()
-  const trayBounds = tray.getBounds()
-
-  // Center window horizontally below the tray icon
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
-
-  // Position window 4 pixels vertically below the tray icon
-  const y = Math.round(trayBounds.y + trayBounds.height + 3)
-
-  return {x: x, y: y}
-}
-
-
 const showWindow = () => {
-  const position = getWindowPosition()
-  mainWindow.setPosition(position.x, position.y, false)
   mainWindow.show()
   mainWindow.focus()
 }
 
+const checkForUpdates = () => {
+  mainWindow.webContents.send('update', 'main');
+}
+
 // Creates tray image & toggles window on click
 const createTray = () => {
-  tray = new electron.Tray(path.join(assetsDirectory, 'icon.png'))
+  if(isMac) {
+    tray = new electron.Tray(path.join(assetsDirectory, 'baseline_opacity_black_36dp.png'))
+  } else {
+    tray = new electron.Tray(path.join(assetsDirectory, 'baseline_opacity_white_36dp.png'))
+  }
   tray.on('click', function (event) {
     toggleWindow()
   })
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'About', type: 'normal',  click: () => toggleWindow()},
+    {label: 'Check for updates...', type: 'normal',  click: () => checkForUpdates()},
+    {label: 'Exit', type: 'normal',  click: () => app.quit()}
+  ])
+  tray.setToolTip('Elderberry 1.0.0')
+  tray.setContextMenu(contextMenu)
 }
+
+
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, 
-    height: 600, 
+  mainWindow = new BrowserWindow({width: 400, 
+    height: 400, 
     show: false, 
     frame: false, 
     fullscreenable: false, 
